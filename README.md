@@ -42,15 +42,15 @@ go run main.go
 **API Demo**
 
 * GET
-1. The first one is to test whether it could run on port 8000 
+** Test whether it could run on port 8000 
 ```
 http://localhost:8000/
 ``` 
-2. The seconde one is to check the user's information from database and the user's id as input
+** Check the user's information from database and the user's id as input
 ```
 http://localhost:8000/user/:id
 ```  
-3. The third one is to check all the users' information from database
+** Check all the users' information from database
 ```
 http://localhost:8000/users
 ```
