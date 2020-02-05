@@ -8,3 +8,4 @@ create table user (
 	lastname  varchar(40) not null default ""
 ) engine=innodb default charset=utf8;
 
+

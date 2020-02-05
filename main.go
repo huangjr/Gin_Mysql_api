@@ -1,10 +1,7 @@
 package main
 
 import (
-	"./routers"
-	// "github.com/gin-gonic/gin"
-	// _ "github.com/go-sql-driver/mysql"
-	// "gopkg.in/gin-gonic/gin.v1"
+	"Gin_Mysql_api/routers"
 )
 
 func main() {

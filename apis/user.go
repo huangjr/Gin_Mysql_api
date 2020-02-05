@@ -6,7 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"../models"
+	"Gin_Mysql_api/models"
+
 	"github.com/gin-gonic/gin"
 )
 

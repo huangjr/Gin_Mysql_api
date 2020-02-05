@@ -3,7 +3,7 @@ package models
 import (
 	"log"
 
-	db "../database"
+	db "Gin_Mysql_api/database"
 )
 
 type User struct {

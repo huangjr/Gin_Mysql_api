@@ -1,7 +1,8 @@
 package routers
 
 import (
-	"../apis"
+	"Gin_Mysql_api/apis"
+
 	"github.com/gin-gonic/gin"
 )
 
