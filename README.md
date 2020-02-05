@@ -64,7 +64,7 @@ http://localhost:8000/user
 http://localhost:8000/users/AddUsers
 ```
 Below is the example for json to add users
-```
+~~~sql
 {
 "data":[{
 	"first_name":"Amy",
@@ -74,13 +74,13 @@ Below is the example for json to add users
 	"last_name":"Chang"
     }]
 }
-```
+~~~
 3. The third one is to "delete" users by its ids and it needs json as input
 ```
 http://localhost:8000/users/DeleteUserByIds
 ```
 Below is the example for json to delete users by its ids
-```
+~~~sql
 {
 "data":[{
 	"id":5
@@ -88,7 +88,7 @@ Below is the example for json to delete users by its ids
 	"id":6
     }]
 }
-```
+~~~
 * DELETE
 1. You can delete one user by its id 
 ```
