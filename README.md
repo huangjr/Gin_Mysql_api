@@ -14,12 +14,12 @@ git clone https://github.com/huangjr/Gin_Mysql_api.git
 
 **MySQL Setting**
 
-Database Name: mydb
-User Account: adm_user1 
-Password: 12345678
-Network Address: 127.0.0.1
-TCP/IP Port: 3306
-db.sql code:
+Database Name: mydb  
+User Account: adm_user1   
+Password: 12345678  
+Network Address: 127.0.0.1  
+TCP/IP Port: 3306  
+db.sql code:  
 ~~~sql
 -- MySql 
 
