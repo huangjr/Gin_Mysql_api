@@ -43,21 +43,21 @@ go run main.go
 
 * GET  
     * Test whether it could run on port 8000 
-        >> http://localhost:8000/
+        > http://localhost:8000/
 
     * Check the user's information from database and the user's id as input  
 
-        >> http://localhost:8000/user/:id
+        > http://localhost:8000/user/:id
 
      * Check all the users' information from database  
-        >> http://localhost:8000/users
+        > http://localhost:8000/users
 
 * POST
     * Add one user into database, and it needs first_name and last_name as keys in body 
-        >> http://localhost:8000/user
+        > http://localhost:8000/user
 
     * Add users into database, and it needs json as input
-        >> http://localhost:8000/users/AddUsers
+        > http://localhost:8000/users/AddUsers
         
         Below is the example for json to add users
         ~~~sql
@@ -73,7 +73,7 @@ go run main.go
         ~~~
     * "Delete" users by its ids and it needs json as input
 
-        >> http://localhost:8000/users/DeleteUserByIds
+        > http://localhost:8000/users/DeleteUserByIds
         
         Below is the example for json to delete users by its ids
         ~~~sql
@@ -87,10 +87,10 @@ go run main.go
         ~~~
 * DELETE
     * Delete one user by its id 
-        >> http://localhost:8000/user/:id
+        > http://localhost:8000/user/:id
 
 * PUT
     * Modify the user's information by his id, including his first_name and last_name
 
-        >> http://localhost:8000/user/:id
+        > http://localhost:8000/user/:id
 
