@@ -46,10 +46,12 @@ go run main.go
 ```
 http://localhost:8000/
 ``` 
+
      * Check the user's information from database and the user's id as input
 ```
 http://localhost:8000/user/:id
 ```  
+
      * Check all the users' information from database
 ```
 http://localhost:8000/users
