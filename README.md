@@ -42,7 +42,7 @@ go run main.go
 **API Demo**
 
 * GET  
-** Test whether it could run on port 8000 
+-- Test whether it could run on port 8000 
 ```
 http://localhost:8000/
 ``` 
