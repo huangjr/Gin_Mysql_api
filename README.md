@@ -34,9 +34,9 @@ create table user (
 
 **Build & Run**
 ```
+export GO111MODULE=on
 cd Gin_Mysql_api  
-go build main.go  
-./main
+go run main.go  
 ```
 
 **API Demo**
