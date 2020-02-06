@@ -26,7 +26,7 @@ func AddUserApi(c *gin.Context) {
 
 	ra, err := p.AddUser()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	msg := fmt.Sprintf("insert successful %d", ra)
@@ -42,7 +42,7 @@ func AddUsersApi(c *gin.Context) {
 	err := c.BindJSON(&users)
 
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 
 	}
@@ -56,7 +56,7 @@ func AddUsersApi(c *gin.Context) {
 
 		ra, err := p.AddUser()
 		if err != nil {
-			log.Fatalln(err)
+			log.Println(err)
 		}
 
 		msg := fmt.Sprintf("insert successful %d", ra)
@@ -76,7 +76,8 @@ func DelUserIdsApi(c *gin.Context) {
 	err := c.BindJSON(&users)
 
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
 
 	for _, user := range users.Users {
@@ -89,7 +90,7 @@ func DelUserIdsApi(c *gin.Context) {
 
 		ra, err := p.DelUser()
 		if err != nil {
-			log.Fatalln(err)
+			log.Println(err)
 		}
 
 		msg := fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
@@ -108,7 +109,7 @@ func DelUserApi(c *gin.Context) {
 
 	ra, err := p.DelUser()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	msg := fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
@@ -126,12 +127,12 @@ func ModUserApi(c *gin.Context) {
 
 	err := c.Bind(&p)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	ra, err := p.ModUser()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	msg := fmt.Sprintf("Update person %d successful %d", p.Id, ra)
@@ -148,7 +149,7 @@ func GetUserApi(c *gin.Context) {
 
 	user, err := p.GetUser()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -161,7 +162,7 @@ func GetUsersApi(c *gin.Context) {
 
 	users, err := p.GetUsers()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{

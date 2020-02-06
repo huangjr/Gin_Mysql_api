@@ -19,17 +19,17 @@ type Users struct {
 func (p *User) AddUser() (id int64, err error) {
 	stmtIn, err := db.SqlDB.Prepare("INSERT INTO user(firstname, lastname) VALUES(?, ?)")
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	res, err := stmtIn.Exec(p.FirstName, p.LastName)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	id, err = res.LastInsertId()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	return
@@ -91,7 +91,7 @@ func (p *User) GetUsers() (users []User, err error) {
 
 	rows, err := stmsOut.Query()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	for rows.Next() {
@@ -101,7 +101,7 @@ func (p *User) GetUsers() (users []User, err error) {
 	}
 
 	if err = rows.Err(); err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 
 	return
