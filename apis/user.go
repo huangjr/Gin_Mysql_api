@@ -47,27 +47,27 @@ func AddUsersApi(c *gin.Context) {
 
 	}
 
-	// for _, user := range users.Users {
+	for _, user := range users.Users {
 
-	// 	firstName := user.FirstName
-	// 	lastName := user.LastName
+		firstName := user.FirstName
+		lastName := user.LastName
 
-	// 	p := models.User{FirstName: firstName, LastName: lastName}
+		p := models.User{FirstName: firstName, LastName: lastName}
 
-	// 	ra, err := p.AddUser()
-	// 	if err != nil {
-	// 		log.Fatalln(err)
-	// 	}
+		ra, err := p.AddUser()
+		if err != nil {
+			log.Fatalln(err)
+		}
 
-	// 	msg := fmt.Sprintf("insert successful %d", ra)
+		msg := fmt.Sprintf("insert successful %d", ra)
 
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"msg": msg,
-	// 	})
+		c.JSON(http.StatusOK, gin.H{
+			"msg": msg,
+		})
 
-	// 	// fmt.Printf("%+v\n", person.FirstName)   // show on terminal
-	// 	// c.JSON(http.StatusOK, person.FirstName) //show on postman
-	// }
+		// fmt.Printf("%+v\n", person.FirstName)   // show on terminal
+		// c.JSON(http.StatusOK, person.FirstName) //show on postman
+	}
 }
 
 func DelUserIdsApi(c *gin.Context) {
