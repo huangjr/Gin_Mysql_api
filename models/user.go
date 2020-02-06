@@ -8,12 +8,12 @@ import (
 
 type User struct {
 	Id        int    `json:"id" form:"id"`
-	FirstName string `json:"first_name" form:"first_name"`
-	LastName  string `json:"last_name" form:"last_name"`
+	FirstName string `json:"first_name" form:"first_name" binding:"required"`
+	LastName  string `json:"last_name" form:"last_name" binding:"required"`
 }
 
 type Users struct {
-	Users []User `json:"data"`
+	Users []User `json:"data" binding:"required"`
 }
 
 func (p *User) AddUser() (id int64, err error) {

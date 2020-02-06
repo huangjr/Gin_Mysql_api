@@ -16,11 +16,11 @@ func IndexApi(c *gin.Context) {
 }
 
 func AddUserApi(c *gin.Context) {
+
 	firstName := c.Request.FormValue("first_name")
 	lastName := c.Request.FormValue("last_name")
 
-	log.Println(firstName)
-	log.Println(lastName)
+	log.Println(firstName, lastName)
 
 	p := models.User{FirstName: firstName, LastName: lastName}
 
@@ -43,28 +43,31 @@ func AddUsersApi(c *gin.Context) {
 
 	if err != nil {
 		log.Fatalln(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+
 	}
-	for _, user := range users.Users {
 
-		firstName := user.FirstName
-		lastName := user.LastName
+	// for _, user := range users.Users {
 
-		p := models.User{FirstName: firstName, LastName: lastName}
+	// 	firstName := user.FirstName
+	// 	lastName := user.LastName
 
-		ra, err := p.AddUser()
-		if err != nil {
-			log.Fatalln(err)
-		}
+	// 	p := models.User{FirstName: firstName, LastName: lastName}
 
-		msg := fmt.Sprintf("insert successful %d", ra)
+	// 	ra, err := p.AddUser()
+	// 	if err != nil {
+	// 		log.Fatalln(err)
+	// 	}
 
-		c.JSON(http.StatusOK, gin.H{
-			"msg": msg,
-		})
+	// 	msg := fmt.Sprintf("insert successful %d", ra)
 
-		// fmt.Printf("%+v\n", person.FirstName)   // show on terminal
-		// c.JSON(http.StatusOK, person.FirstName) //show on postman
-	}
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"msg": msg,
+	// 	})
+
+	// 	// fmt.Printf("%+v\n", person.FirstName)   // show on terminal
+	// 	// c.JSON(http.StatusOK, person.FirstName) //show on postman
+	// }
 }
 
 func DelUserIdsApi(c *gin.Context) {
