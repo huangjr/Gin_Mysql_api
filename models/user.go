@@ -13,7 +13,7 @@ type User struct {
 }
 
 type Users struct {
-	Users []User `json:"data" binding:"required"`
+	Users []User `json:"users" binding:"required"`
 }
 
 func (p *User) AddUser() (id int64, err error) {

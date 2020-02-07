@@ -15,20 +15,7 @@ func IndexApi(c *gin.Context) {
 	c.String(http.StatusOK, "It works.")
 }
 
-func AddUserApi(c *gin.Context) {
-
-	var user models.User
-
-	err := c.ShouldBind(&user)
-
-	if err != nil {
-		log.Println(err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	// firstName := c.Request.FormValue("first_name")
-	// lastName := c.Request.FormValue("last_name")
+func CommonAddUser(user models.User) (msg string) {
 
 	firstName := user.FirstName
 	lastName := user.LastName
@@ -42,7 +29,23 @@ func AddUserApi(c *gin.Context) {
 		log.Println(err)
 	}
 
-	msg := fmt.Sprintf("insert successful %d", ra)
+	msg = fmt.Sprintf("insert successful %d", ra)
+	return msg
+}
+
+func AddUserApi(c *gin.Context) {
+
+	var user models.User
+
+	err := c.ShouldBind(&user)
+
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	msg := CommonAddUser(user)
 
 	c.JSON(http.StatusOK, gin.H{
 		"msg": msg,
@@ -50,8 +53,9 @@ func AddUserApi(c *gin.Context) {
 }
 
 func AddUsersApi(c *gin.Context) {
+
 	var users models.Users
-	// var persons []models.Person
+
 	err := c.ShouldBindJSON(&users)
 
 	if err != nil {
@@ -62,24 +66,17 @@ func AddUsersApi(c *gin.Context) {
 
 	for _, user := range users.Users {
 
-		firstName := user.FirstName
-		lastName := user.LastName
+		var msg string
 
-		p := models.User{FirstName: firstName, LastName: lastName}
+		if user.FirstName == "" || user.LastName == "" {
+			msg = fmt.Sprintf("invalid user.FirstName and user.LastName")
 
-		ra, err := p.AddUser()
-		if err != nil {
-			log.Println(err)
+		} else {
+			msg = CommonAddUser(user)
 		}
 
-		msg := fmt.Sprintf("insert successful %d", ra)
+		c.JSON(http.StatusOK, gin.H{"msg": msg})
 
-		c.JSON(http.StatusOK, gin.H{
-			"msg": msg,
-		})
-
-		// fmt.Printf("%+v\n", person.FirstName)   // show on terminal
-		// c.JSON(http.StatusOK, person.FirstName) //show on postman
 	}
 }
 
