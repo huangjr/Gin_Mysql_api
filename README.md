@@ -46,34 +46,39 @@ go build main.go
         > http://localhost:8000/
 
 		e.g.
-		> curl -X GET http://localhost:8000/
-
+		```
+		curl -X GET http://localhost:8000/
+		```
     * Check the user's information from database by giving the user's id  
 
         > http://localhost:8000/user/:id
 		
 		e.g.
-		> curl -X GET http://localhost:8000/user/2
-
+		```
+		curl -X GET http://localhost:8000/user/2
+		```
      * Check all the users' information from database  
         > http://localhost:8000/users
 
 		e.g.
-		> curl -X GET http://localhost:8000/users
-
+		```
+		curl -X GET http://localhost:8000/users
+		```
 * POST
     * Add one user into database, giving first_name and last_name as keys in body 
         > http://localhost:8000/user
 
 		e.g.  
-		> curl -X POST http://localhost:8000/user -d 'first_name=Amy&last_name=Huang'
-
+		```
+		curl -X POST http://localhost:8000/user -d 'first_name=Amy&last_name=Huang'
+		```
     * Add users into database, and it needs json as input
         > http://localhost:8000/users/AddUsers
 
 		e.g.
-		> curl -X POST http://localhost:8000/users/AddUsers -d '{"users":[{"first_name":"Amy","last_name":"Huang"},{"first_name":"John","last_name":"Chang"}]}'
-        
+		```
+		curl -X POST http://localhost:8000/users/AddUsers -d '{"users":[{"first_name":"Amy","last_name":"Huang"},{"first_name":"John","last_name":"Chang"}]}'
+        ```
         Below is the example for json to add users
         ~~~sql
         {
@@ -91,8 +96,9 @@ go build main.go
         > http://localhost:8000/users/DeleteUserByIds
         
 		e.g.  
-		> curl -X POST http://localhost:8000/users/DeleteUserByIds -d '{"users":[{"id":99},{"id":100}]}'
-
+		```	
+		curl -X POST http://localhost:8000/users/DeleteUserByIds -d '{"users":[{"id":99},{"id":100}]}'
+		```
         Below is the example for json to delete users by its ids
         ~~~sql
         {
@@ -106,13 +112,17 @@ go build main.go
 * DELETE
     * Delete one user by its id 
         > http://localhost:8000/user/:id
+		
 		e.g.
-		> curl -X DELETE http://localhost:8000/user/50
-
+		```
+		curl -X DELETE http://localhost:8000/user/50
+		```
 * PUT
     * Modify the user's information by his id, including his first_name and last_name
 
         > http://localhost:8000/user/:id
+		
 		e.g. 
-		> curl -X PUT http://localhost:8000/user/2 -d 'first_name=Amy&last_name=Huang'
-
+		```
+		curl -X PUT http://localhost:8000/user/2 -d 'first_name=Amy&last_name=Huang'
+		```
