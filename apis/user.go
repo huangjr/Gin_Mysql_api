@@ -17,8 +17,21 @@ func IndexApi(c *gin.Context) {
 
 func AddUserApi(c *gin.Context) {
 
-	firstName := c.Request.FormValue("first_name")
-	lastName := c.Request.FormValue("last_name")
+	var user models.User
+
+	err := c.ShouldBind(&user)
+
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	// firstName := c.Request.FormValue("first_name")
+	// lastName := c.Request.FormValue("last_name")
+
+	firstName := user.FirstName
+	lastName := user.LastName
 
 	log.Println(firstName, lastName)
 
@@ -39,12 +52,12 @@ func AddUserApi(c *gin.Context) {
 func AddUsersApi(c *gin.Context) {
 	var users models.Users
 	// var persons []models.Person
-	err := c.BindJSON(&users)
+	err := c.ShouldBindJSON(&users)
 
 	if err != nil {
 		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-
+		return
 	}
 
 	for _, user := range users.Users {
