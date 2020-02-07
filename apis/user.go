@@ -64,18 +64,26 @@ func AddUsersApi(c *gin.Context) {
 		return
 	}
 
+	if len(users.Users) == 0 {
+		log.Println("empty")
+		c.JSON(http.StatusBadRequest, gin.H{"error": "empty"})
+		return
+	}
+
 	for _, user := range users.Users {
 
 		var msg string
 
 		if user.FirstName == "" || user.LastName == "" {
 			msg = fmt.Sprintf("invalid user.FirstName and user.LastName")
+			c.JSON(http.StatusBadRequest, gin.H{"msg": msg})
 
 		} else {
 			msg = CommonAddUser(user)
+			c.JSON(http.StatusOK, gin.H{"msg": msg})
 		}
 
-		c.JSON(http.StatusOK, gin.H{"msg": msg})
+		log.Println(msg)
 
 	}
 }
@@ -83,31 +91,38 @@ func AddUsersApi(c *gin.Context) {
 func DelUserIdsApi(c *gin.Context) {
 	var users models.Users
 	// var persons []models.Person
-	err := c.BindJSON(&users)
+	err := c.ShouldBindJSON(&users)
 
 	if err != nil {
 		log.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	if len(users.Users) == 0 {
+		log.Println("empty")
+		c.JSON(http.StatusBadRequest, gin.H{"error": "empty"})
+		return
 	}
 
 	for _, user := range users.Users {
 
 		id := user.Id
-
 		log.Println(id)
-
 		p := models.User{Id: id}
-
 		ra, err := p.DelUser()
 		if err != nil {
 			log.Println(err)
 		}
+		var msg string
 
-		msg := fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
-
-		c.JSON(http.StatusOK, gin.H{
-			"msg": msg,
-		})
+		if ra == 0 {
+			msg = fmt.Sprintf("Affected %d row.", ra)
+			c.JSON(http.StatusBadRequest, gin.H{"msg": msg})
+		} else {
+			msg = fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
+			c.JSON(http.StatusOK, gin.H{"msg": msg})
+		}
 	}
 }
 
@@ -116,28 +131,45 @@ func DelUserApi(c *gin.Context) {
 	id, _ := strconv.Atoi(cid)
 
 	p := models.User{Id: id}
-
 	ra, err := p.DelUser()
+
 	if err != nil {
 		log.Println(err)
 	}
+	var msg string
 
-	msg := fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
+	if ra == 0 {
+		msg = fmt.Sprintf("Affected %d row.", ra)
+		c.JSON(http.StatusBadRequest, gin.H{"msg": msg})
+	} else {
+		msg = fmt.Sprintf("Delete person %d successful, Affected %d row.", id, ra)
+		c.JSON(http.StatusOK, gin.H{"msg": msg})
+	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"msg": msg,
-	})
 }
 
 func ModUserApi(c *gin.Context) {
+	// cid := c.Param("id")
+	// id, _ := strconv.Atoi(cid)
+
+	// p := models.User{Id: id}
+
+	// err := c.ShouldBind(&p)
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+
 	cid := c.Param("id")
 	id, _ := strconv.Atoi(cid)
 
 	p := models.User{Id: id}
 
-	err := c.Bind(&p)
+	err := c.ShouldBind(&p)
+
 	if err != nil {
 		log.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	ra, err := p.ModUser()
@@ -145,11 +177,14 @@ func ModUserApi(c *gin.Context) {
 		log.Println(err)
 	}
 
-	msg := fmt.Sprintf("Update person %d successful %d", p.Id, ra)
-
-	c.JSON(http.StatusOK, gin.H{
-		"msg": msg,
-	})
+	var msg string
+	if ra == 0 {
+		msg = fmt.Sprintf("Update %d person", ra)
+		c.JSON(http.StatusBadRequest, gin.H{"msg": msg})
+	} else {
+		msg = fmt.Sprintf("Update person %d successful", p.Id)
+		c.JSON(http.StatusOK, gin.H{"msg": msg})
+	}
 }
 
 func GetUserApi(c *gin.Context) {
